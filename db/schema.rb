@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20130808113345) do
 
   create_table "trips", :force => true do |t|
     t.string   "name"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -29,10 +30,11 @@ ActiveRecord::Schema.define(:version => 20130808113345) do
 
   create_table "waypoints", :force => true do |t|
     t.string   "name"
-    t.decimal  "latitude",   :precision => 15, :scale => 0
-    t.decimal  "longitude",  :precision => 15, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "trip_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
