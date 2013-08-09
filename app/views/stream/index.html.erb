@@ -1,2 +1,11 @@
-@user is set to <%= @user.id %>
-session[:uid] is set to <%= session[:uid] %>
+<% @trips.each do |trip| %>
+<span class="row-fluid">
+	<span class="span8 offset2">
+		<h3><%= trip.name %></h3>
+		<p>Owner: <%= trip.user.name %></p>
+		<p>Waypoints: <%= trip.waypoints.length %></p>
+		<p>Updated on: <%= trip.updated_at %></p>
+		<hr />
+	</span>
+</span>
+<% end %>
