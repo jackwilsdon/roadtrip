@@ -16,4 +16,10 @@ class UserController < ApplicationController
       redirect_to :action => "login"
     end 
   end
+
+  def logout
+    session[:uid] = nil
+    flash[:notice] = "Logged out!"
+    redirect_to "/"
+  end
 end

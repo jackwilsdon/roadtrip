@@ -19,4 +19,9 @@ class User < ActiveRecord::Base
   def match_password(login_password="")
     password == login_password
   end
+
+  def can_access(trip_id=0)
+    access_to.split(",").include? trip_id
+  end
+
 end
