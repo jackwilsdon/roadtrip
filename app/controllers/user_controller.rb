@@ -1,6 +1,5 @@
 class UserController < ApplicationController
   def login
-    @no_pad = true
     @hide_nav = true
   end
 
