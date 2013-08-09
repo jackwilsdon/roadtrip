@@ -21,7 +21,11 @@ class User < ActiveRecord::Base
   end
 
   def can_access(trip_id=0)
-    access_to.split(",").include? trip_id
+    if access_to
+      access_to.split(",").include? trip_id.to_s
+    else
+      false
+    end
   end
 
 end
