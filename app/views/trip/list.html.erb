@@ -1,0 +1,10 @@
+<% @trips.each do |trip| %>
+<span class="row-fluid">
+	<span class="span8 offset2 well">
+		<h3><%= trip.name %></h3>
+		<p>Owner: <%= trip.user.name %></p>
+		<p>Waypoints: <%= trip.waypoints.length %></p>
+		<p>Updated on: <%= trip.updated_at %></p>
+	</span>
+</span>
+<% end %>
