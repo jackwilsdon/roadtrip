@@ -1,7 +1,6 @@
 class UserController < ApplicationController
-  layout "login"
-
   def login
+    @hide_nav = true
   end
 
   def login_attempt
@@ -12,7 +11,7 @@ class UserController < ApplicationController
       redirect_to "/"
     else
       flash[:notice] = "Invalid username or password!"
-      flash[:color] = "invalid"
+      flash[:class] = "alert-error"
       redirect_to :action => "login"
     end 
   end
