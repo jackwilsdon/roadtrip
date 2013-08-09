@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Roadtrip</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<meta charset="utf-8">
+	<title>Roadtrip</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
+	<% unless @hide_nav %><div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">Roadtrip</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav navbar-nav">
+					<% if @user %>
+						<li class="active"><a href="#">Stream</a></li>
+					<% else %>
+						<li class="active"><a href="#">Home</a></li>
+					<% end %>
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+					<% if @user %>
+						<li><a href="#"><span class="icon-plus"></span></a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @user.name %> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><%= link_to @user do %><span class="icon-user"></span> Profile<% end %></li>
+								<li><%= link_to controller: "trip", action: "list" do %><span class="icon-list"></span> My Roadtrips<% end %></li>
+								<li class="divider"></li>
+								<li><%= link_to controller: "user", action: "logout" do %><span class="icon-signout"></span> Sign out<% end %></li>
+							</ul>
+						</li>
+					<% else %>
+						<li><%= link_to "Sign in", controller: "user", action: "login" %></li>
+					<% end %>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div><% end %>
 
-<%= yield %>
-
-</body>
+	<div class="container">
+	<%= yield %>
+	</div> <!-- /container -->
+	</body>
 </html>
