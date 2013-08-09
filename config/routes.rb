@@ -10,5 +10,5 @@ Roadtrip::Application.routes.draw do
 
   get "/trip/list", to: "trip#list"
   get "/trip/:id", to: "trip#show"
-  resources :user, :trip, :stream
+  resources :user, :trip
 end
