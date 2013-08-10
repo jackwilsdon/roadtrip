@@ -5,7 +5,6 @@
 		<%= flash[:notice] %>
 		</div><% end %>
 		<%= form_for("login_attempt", :html => {:class => "well"}) do |f| %>
-		<h2>Roadtrip Sign In</h2>
 		<%= f.text_field(:name, class: "input-block-level", placeholder: "Username") %>
 		<%= f.password_field(:password, class: "input-block-level", placeholder: "Password") %>
 		<%= f.submit("Sign in", class: "btn btn-large btn-primary btn-block") %><% end %>
