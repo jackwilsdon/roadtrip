@@ -1,1 +1,30 @@
-<%= @trip.inspect %>
+<div class="row-fluid">
+<h3><%= @trip.name %></h3>
+	<div class="span6 well">
+		<ol>
+			<% @trip.waypoints.all.each do |w| %>		
+				<li><%= w.name %></li>
+			<% end %>
+		</ol>
+	</div>
+	<div class="span6 well">
+		<div id="map-canvas"></div>
+	</div>
+</div>
+<script type="text/javascript" encoding="utf-8">
+		var points;
+
+		$(document).ready(function (){
+			$.ajax({
+				url: "/trip/<%= @trip.id %>/json",
+				success: function(data) {
+					console.log(data);
+				},
+				dataType: "json"
+			});
+			mapOptions = {
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
+		});
+</script>

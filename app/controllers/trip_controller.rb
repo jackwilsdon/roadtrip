@@ -13,6 +13,17 @@ class TripController < ApplicationController
     end
   end
 
+  def show_json
+  	unless Trip.where(:id => params[:id]).blank?
+	  	@points = Trip.find(params[:id]).waypoints
+  	else
+  		@points = false
+  	end
+  	if @points
+	  	render :json, @points
+	end
+  end
+
   def new
   end
 
