@@ -11,7 +11,7 @@ Roadtrip::Application.routes.draw do
   get "/trip/list", to: "trip#list"
   get "/trip/new", to: "trip#new"
   post "/trip/new", to: "trip#new_submit"
-  get "/trip/edit", to: "trip#edit"
   get "/trip/:id", to: "trip#show"
+  get "/trip/:id/edit", to: "trip#edit"
   resources :user, :trip
 end
