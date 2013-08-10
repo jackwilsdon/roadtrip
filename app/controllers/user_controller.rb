@@ -1,6 +1,5 @@
 class UserController < ApplicationController
   def login
-    @hide_nav = true
   end
 
   def login_attempt
