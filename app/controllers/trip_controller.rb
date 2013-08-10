@@ -20,8 +20,10 @@ class TripController < ApplicationController
   		@points = false
   	end
   	if @points
-	  	render :json, @points
+	  	render json: @points
+        return
 	end
+    render json: {:error => true}
   end
 
   def new
