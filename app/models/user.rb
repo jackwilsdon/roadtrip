@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :access_to, :name, :password
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
   has_many :trips
 
