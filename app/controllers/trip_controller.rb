@@ -14,6 +14,7 @@ class TripController < ApplicationController
   end
 
   def show_json
+    auth
   	unless Trip.where(:id => params[:id]).blank?
 	  	@points = Trip.find(params[:id]).waypoints
   	else
