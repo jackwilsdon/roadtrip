@@ -7,11 +7,12 @@ Roadtrip::Application.routes.draw do
   get "/user/logout", to: "user#logout"
 
   get "/user/:id", to: "user#show"
-
+ 
   get "/trip/list", to: "trip#list"
   get "/trip/new", to: "trip#new"
   post "/trip/new", to: "trip#new_submit"
   get "/trip/:id", to: "trip#show"
   get "/trip/:id/edit", to: "trip#edit"
+  get "/trip/:id/json", to: "trip#show_json"
   resources :user, :trip
 end
