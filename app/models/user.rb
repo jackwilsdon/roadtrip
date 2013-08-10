@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :access_to, :name, :password
+  attr_accessible :access_to, :name, :password, :updated_at
   validates :name, :presence => true, :uniqueness => true
 
   has_many :trips
@@ -21,11 +21,18 @@ class User < ActiveRecord::Base
   end
 
   def can_access(trip_id=0)
+    val = false 
     if access_to
-      access_to.split(",").include? trip_id.to_s
+      val = access_to.split(",").include? trip_id.to_s
     else
-      false
+      val = false
     end
+   
+    if id == Trip.find(trip_id).user.id
+      val = true
+    end
+
+    val
   end
 
 end
