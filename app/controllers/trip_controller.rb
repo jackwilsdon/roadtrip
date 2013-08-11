@@ -1,4 +1,9 @@
 class TripController < ApplicationController
+  def index
+    auth
+    redirect_to :action => "list"
+  end
+
   def list
     auth
     @trips = @user.trips
@@ -62,5 +67,19 @@ class TripController < ApplicationController
     else
       @trip = false
     end
+  end
+
+  def destroy
+    auth
+    unless Trip.where(:id => params[:id]).blank?
+      trip = Trip.find(params[:id])
+      trip.destroy
+      flash[:notice] = "Deleted trip " + trip.name
+      flash[:class] = "alert-success"
+    else
+      flash[:notice] = "Unable to delete trip #{params[:id]}!"
+      flash[:class] = "alert-error"
+    end
+    redirect_to :controller => "trip", :action => "list"
   end
 end
