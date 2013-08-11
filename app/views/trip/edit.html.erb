@@ -1,0 +1,12 @@
+<div class="row-fluid">
+	<div class="span6 offset3">
+		<% if flash[:notice] %><div class="alert<%= " " + flash[:class] if flash[:class] %>">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<%= flash[:notice] %>
+		</div><% end %>
+		<h4 class="text-center">New Roadtrip</h4>
+		<%= form_for("new_submit", :html => {:class => "well"}) do |f| %>
+		<%= f.text_field(:name, class: "input-block-level", placeholder: "Name") %>
+		<%= f.submit("Create", class: "btn btn-large btn-primary btn-block") %><% end %>
+	</div>
+</div>

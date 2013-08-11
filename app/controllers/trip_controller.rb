@@ -11,8 +11,10 @@ class TripController < ApplicationController
 
   def show
     auth
+    @nopad = true
     unless Trip.where(:id => params[:id]).blank?
       @trip = Trip.find(params[:id])
+      @mapjs = true
     else
       @trip = false
     end

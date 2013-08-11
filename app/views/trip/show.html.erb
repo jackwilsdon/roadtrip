@@ -24,32 +24,66 @@
 		</table>
 	</div>
 	<div class="span6 well">
-		<div id="map-canvas"></div>
+		<div id="map-canvas" class="span12"></div>
 	</div>
 </div>
 <script type="text/javascript" encoding="utf-8">
-	var points;
-
-	function init() {
-		var response;
+	var points = [];
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
+	function setup()
+	{
 		$.ajax({
 			url: "/trip/<%= @trip.id %>/json",
 			success: function(data) {
-				response = data;
+				for (var i = 0; i < data.length; i++)
+				{
+					points.push({"name": data.name, "latlng": new google.maps.LatLng(data[i].latitude, data[i].longitude)})
+				}
+				init();
 			},
 			dataType: "json"
 		});
+	}
+
+	function init()
+	{
+		directionsDisplay = new google.maps.DirectionsRenderer();
 		var mapOptions = {
+			center: new google.maps.LatLng(0, 0),
+			zoom: 8,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-		for (var i=0; i<response.length; i++) {
+		var bounds = new google.maps.LatLngBounds();
+		var ap = [];
+		for (var i = 0; i < points.length; i++)
+		{
+			var p = points[i];
+			bounds.extend(p.latlng);
+			ap.push({"location": p.latlng});
 			new google.maps.Marker({
-				position: new google.maps.LatLng(i.latitude, i.longitude),
-				map: map,
-				title: i.name
+				"name": p.name,
+				"position": p.latlng,
+				"map": map
 			});
 		}
+		map.fitBounds(bounds);
+		directionsDisplay.setMap(map);
+
+		var request = {
+			origin: points[0].latlng,
+			destination: points[points.length-1].latlng,
+			waypoints: ap,
+			optimizeWaypoints: true,
+			travelMode: google.maps.TravelMode.DRIVING
+		};
+
+		directionsService.route(request, function(response, status)
+		{
+			console.log(status);
+			directionsDisplay.setDirections(response);
+		});
 	}
-	google.maps.event.addDomListener(window, 'load', init)
+	google.maps.event.addDomListener(window, 'load', setup)
 </script>
