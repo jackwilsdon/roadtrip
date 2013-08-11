@@ -10,7 +10,8 @@
 	<%= stylesheet_link_tag "bootstrap/bootstrap-custom.css" unless @no_pad %>
 	<%= stylesheet_link_tag "bootstrap/bootstrap-responsive.min.css" %>
 
-	<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAQn3nm2o7Ohn2yoXlt69Jg8nJZr89fRN0&sensor=false".html_safe %>
+	<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAQn3nm2o7Ohn2yoXlt69Jg8nJZr89fRN0&sensor=false".html_safe if @mapjs %>
+ 
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 </head>
